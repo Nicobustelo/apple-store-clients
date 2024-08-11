@@ -25,14 +25,13 @@ export interface Image {
     url: string,
 };
 
-export interface Model {
+export interface Subcategory {
     id: string,
     name: string,
-    value: string,
-};  
+    values: Value[],
+};
 
-export interface Memory {
+export interface Value {
     id: string,
-    name: string,
     value: string,
 };

@@ -4,20 +4,23 @@ import { useState } from "react";
 import { Plus, X } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 
-import { Memory, Model } from "@/types";
 import Button from "@/components/ui/Button";
 import IconButton from "@/components/ui/IconButton";
 
 import Filter from "./Filter";
 
+interface Subcategory {
+    id: string;
+    name: string;
+    values: { id: string; value: string }[];
+}
+
 interface MobileFiltersProps {
-    models: Model[];
-    memories: Memory[];
+    subcategories: Subcategory[];
 }
 
 const MobileFilters: React.FC<MobileFiltersProps> = ({
-    models,
-    memories
+    subcategories
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -27,11 +30,11 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({
     return ( 
         <>
             <Button onClick={onOpen} className="flex items-center gap-x-2 lg:hidden">
-                Filters
+                Filtros
                 <Plus size={20} />
             </Button>
 
-            <Dialog open={open} as={"div"} className="relative z-40 lg:hidden" onClose={onClose}>
+            <Dialog open={open} as="div" className="relative z-40 lg:hidden" onClose={onClose}>
                 {/* Background */}
                 <div className="fixed inset-0 bg-black bg-opacity-25" />
 
@@ -45,16 +48,14 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({
 
                         {/* Render  Filters */}
                         <div className="p-4">
-                            <Filter 
-                                valueKey="modelId"
-                                name="Model"
-                                data={models}
-                            />
-                            <Filter 
-                                valueKey="memoryId"
-                                name="Memory"
-                                data={memories}
-                            />
+                            {subcategories.map((subcategory) => (
+                                <Filter 
+                                    key={subcategory.id}
+                                    valueKey={subcategory.id}
+                                    name={subcategory.name}
+                                    data={subcategory.values}
+                                />
+                            ))}
                         </div>
                     </Dialog.Panel>
                 </div>

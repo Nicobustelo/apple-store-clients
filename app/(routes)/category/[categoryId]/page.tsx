@@ -1,6 +1,5 @@
 import getCategory from "@/actions/get-category";
-import getModels from "@/actions/get-models";
-import getMemories from "@/actions/get-memories";
+import getSubcategories from "@/actions/get-subcategories";
 import getProducts from "@/actions/get-products";
 import Container from "@/components/ui/Container";
 import Billboard from "@/components/Billboard";
@@ -17,9 +16,14 @@ interface CategoryPageProps {
         categoryId: string;
     };
     searchParams: {
-        modelId: string,
-        memoryId: string,
+        [key: string]: string;
     }
+}
+
+interface Subcategory {
+    id: string;
+    name: string;
+    values: { id: string; value: string }[];
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = async ({
@@ -28,11 +32,10 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
 }) => {
     const products = await getProducts({
         categoryId: params.categoryId,
-        modelId: searchParams.modelId,
-        memoryId: searchParams.memoryId
-    })
-    const models = await getModels();
-    const memories = await getMemories();
+        ...searchParams
+    });
+    const subcategoriesData = await getSubcategories(params.categoryId);
+    const subcategories: Subcategory[] = Array.isArray(subcategoriesData) ? subcategoriesData : [subcategoriesData];
     const category = await getCategory(params.categoryId);
 
     return ( 
@@ -43,18 +46,16 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
                 />
                 <div className="px-4 sm:px-6 lg:px-8 pb-24">
                     <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
-                        <MobileFilters models={models} memories={memories}/>
+                        <MobileFilters subcategories={subcategories} />
                         <div className="hidden lg:block">
-                            <Filter 
-                                valueKey="modelId"
-                                name="Model"
-                                data={models}
-                            />
-                            <Filter 
-                                valueKey="memoryId"
-                                name="Memory"
-                                data={memories}
-                            />
+                            {subcategories.map((subcategory) => (
+                                <Filter 
+                                    key={subcategory.id}
+                                    valueKey={subcategory.id}
+                                    name={subcategory.name}
+                                    data={subcategory.values}
+                                />
+                            ))}
                         </div>
                         <div className="mt-6 lg:col-span-4 lg:mt-0">
                             {products.length === 0 && <NoResults />}

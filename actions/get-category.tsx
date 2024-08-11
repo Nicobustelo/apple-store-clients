@@ -6,7 +6,7 @@ const getCategory = async (id: string): Promise<Category> => {
     const res = await fetch(`${URL}/${id}`);
 
     const data = res.json();
-    
+
     return data;
 }
 

@@ -1,15 +1,12 @@
 "use client"
 
 import qs from "query-string";
-
 import { useRouter, useSearchParams } from "next/navigation";
-
-import { Model, Memory } from "@/types";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 interface FilterProps {
-    data: (Model | Memory)[];
+    data: { id: string; value: string }[];
     name: string;
     valueKey: string;
 }
@@ -61,7 +58,7 @@ const Filter: React.FC<FilterProps> = ({
                             )}
                             onClick={() => onClick(filter.id)}
                         >
-                            {filter.name}
+                            {filter.value}
                         </Button>
                     </div>
                 ))}

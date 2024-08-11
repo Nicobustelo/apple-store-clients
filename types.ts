@@ -16,8 +16,7 @@ export interface Product {
     name: string,
     price: string,
     isFeatured: boolean,
-    model: Model,
-    memory: Memory,
+    subcategoryValueIds: JSON,
     images: Image[]
 };
 

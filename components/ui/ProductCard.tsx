@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import { Expand, ShoppingCart } from "lucide-react";
+import { Expand } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
 
@@ -46,10 +46,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
                             onClick={onPreview}
                             icon={<Expand size={20} className="text-gray-600"/>}
                         />
-                        <IconButton 
+                        {/* <IconButton 
                             onClick={() => {}}
                             icon={<ShoppingCart size={20} className="text-gray-600"/>}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>

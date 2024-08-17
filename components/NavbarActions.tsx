@@ -15,7 +15,7 @@ const NavbarActions = () => {
 
     useEffect(() => {
         setIsMounted(true);
-    });
+    }, []);
 
     if(!isMounted) {
         return null;

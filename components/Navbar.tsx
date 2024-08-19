@@ -9,8 +9,14 @@ import NavbarActions from "@/components/NavbarActions";
 export const revalidate = 0;
 
 const Navbar = async () => {
-    const categories = await getCategories();
-
+    const categories = await getCategories().then(categories => {
+        console.log(categories);
+        return categories;
+    }).catch(error => {
+        console.error('Error fetching categories:', error);
+        return [];
+    });
+    
     return ( 
         <div className="border-b">
             <Container>

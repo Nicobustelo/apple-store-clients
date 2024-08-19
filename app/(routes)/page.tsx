@@ -8,8 +8,24 @@ import Container from "@/components/ui/Container";
 export const revalidate = 0;
 
 const HomePage = async () => {
-    const products = await getProducts({ isFeatured: true });
-    const billboard = await getBillboard("67f40afa-0aa4-4d8c-ac84-0070e1b73ff9")
+    const products = await getProducts({ isFeatured: true }).then(products => {
+        console.log(products);
+        return products;
+    }).catch(error => {
+        console.error('Error fetching products:', error);
+        return [];
+    });
+    const billboard = await getBillboard("67f40afa-0aa4-4d8c-ac84-0070e1b73ff9").then(billboard => {
+        console.log(billboard);
+        return billboard;
+    }).catch(error => {
+        console.error('Error fetching billboard:', error);
+        return {
+            id: "",
+            label: "",
+            imageUrl: "",
+        }
+    });
 
     return ( 
         <div>

@@ -37,7 +37,7 @@ const Info: React.FC<InfoProps> = ({
                 </p>
             </div>
             <hr className="my-4"/>
-            <div className="flex flex-col gap-y-6">
+            <div className="flex flex-col gap-y-2 lg:gap-y-4">
                 {subcategories.map((subcategory) => (
                     <div key={subcategory.id} className="flex items-center gap-x-4">
                         <h3 className="font-semibold text-black">

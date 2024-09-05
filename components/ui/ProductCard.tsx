@@ -55,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </div>
             {/* Description */}
             <div>
-                <p className="font-semibold text-lg">
+                <p className="font-semibold text-lg overflow-hidden whitespace-nowrap overflow-ellipsis">
                     {data.name}
                 </p>
                 <p className="text-sm text-gray-500">

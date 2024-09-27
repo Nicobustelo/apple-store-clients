@@ -8,8 +8,16 @@ import NavbarActions from "@/components/NavbarActions";
 // Disables cache, so every change in categories will be reflected immediately 
 export const revalidate = 0;
 
-const Navbar = async () => {
-    const categories = await getCategories().then(categories => {
+interface NavbarProps {
+    params: {
+        storeId: string;
+    }
+}
+
+const Navbar:React.FC<NavbarProps> = async ({
+    params
+}) => {
+    const categories = await getCategories(params.storeId).then(categories => {
         console.log(categories);
         return categories;
     }).catch(error => {

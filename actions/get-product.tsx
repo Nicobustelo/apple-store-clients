@@ -1,8 +1,8 @@
 import { Product } from "@/types";
 
-const URL = `${process.env.NEXT_PUBLIC_API_URL}/products`;
+const getProduct = async (storeId: string, id: string): Promise<Product> => {
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/${storeId}/products`;
 
-const getProduct = async (id: string): Promise<Product> => {
     console.log("getProduct() called");
     console.log("id from getProduct():", id);
     console.log("URL from getProduct():", `${URL}/${id}`);

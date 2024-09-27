@@ -1,19 +1,13 @@
 import getCategory from "@/actions/get-category";
 import getSubcategories from "@/actions/get-subcategories";
 import getProducts from "@/actions/get-products";
-import Container from "@/components/ui/Container";
-import Billboard from "@/components/Billboard";
-import NoResults from "@/components/ui/no-results";
-import ProductCard from "@/components/ui/ProductCard";
-
-import Filter from "./components/Filter";
-import MobileFilters from "./components/MobileFilters";
 import CategoryPageComponent from "./CategoryPageComponent";
 
 export const revalidate = 0;
 
 interface CategoryPageProps {
     params: {
+        storeId: string;
         categoryId: string;
     };
     searchParams: {
@@ -33,11 +27,12 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
 }) => {
     const products = await getProducts({
         categoryId: params.categoryId,
-        ...searchParams
+        ...searchParams,
+        storeId: params.storeId
     });
-    const subcategoriesData = await getSubcategories(params.categoryId);
+    const subcategoriesData = await getSubcategories(params.storeId ,params.categoryId);
     const subcategories: Subcategory[] = Array.isArray(subcategoriesData) ? subcategoriesData : [subcategoriesData];
-    const category = await getCategory(params.categoryId);
+    const category = await getCategory(params.storeId, params.categoryId);
 
     console.log("products: ");
     console.log(products);

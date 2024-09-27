@@ -7,15 +7,25 @@ import Container from "@/components/ui/Container";
 // Disables cache, so every change in categories will be reflected immediately 
 export const revalidate = 0;
 
-const HomePage = async () => {
-    const products = await getProducts({ isFeatured: true }).then(products => {
+interface HomePageProps {
+    params: {
+        storeId: string;
+    }
+}
+
+const HomePage:React.FC<HomePageProps> = async ({
+    params
+}) => {
+    const storeId = params.storeId;
+
+    const products = await getProducts({ isFeatured: true, storeId }).then(products => {
         console.log(products);
         return products;
     }).catch(error => {
         console.error('Error fetching products:', error);
         return [];
     });
-    const billboard = await getBillboard("67f40afa-0aa4-4d8c-ac84-0070e1b73ff9").then(billboard => {
+    const billboard = await getBillboard(params.storeId).then(billboard => {
         console.log(billboard);
         return billboard;
     }).catch(error => {

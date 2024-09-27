@@ -7,6 +7,7 @@ import Container from "@/components/ui/Container";
 
 interface ProductPageProps {
     params: {
+        storeId: string;
         productId: string;
     }
 }
@@ -14,13 +15,16 @@ interface ProductPageProps {
 const ProductPage:React.FC<ProductPageProps> = async ({
     params
 }) => {
-    const product = await getProduct(params.productId);
+    const storeId = params.storeId;
+
+    const product = await getProduct(storeId, params.productId);
 
     console.log("product:");
     console.log(product);
 
     const suggestedProducts = await getProducts({
-        categoryId: product?.category?.id
+        categoryId: product?.category?.id,
+        storeId,
     })
 
     return ( 

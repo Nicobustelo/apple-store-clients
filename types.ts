@@ -1,3 +1,12 @@
+export interface Store {
+    id: string,
+    name: string,
+    userId: string,
+    subdomain: string,
+    createdAt: string,
+    updatedAt: string,
+};
+
 export interface Billboard {
     id: string,
     label: string,

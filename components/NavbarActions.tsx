@@ -24,7 +24,9 @@ const NavbarActions = () => {
     return ( 
         <div className="ml-auto flex items-center gap-x-4">
             <Button className="group flex items-center rounded-full bg-black px-4 py-2 hover:opacity-99">
-                <WhatsAppIcon />
+                <a href="https://wa.me/542616575558?text=Quiero%20saber%20mas%20sobre%20tus%20productos" target="blank" className="flex items-center">
+                    <WhatsAppIcon />
+                </a>
             </Button>
         </div>
      );
